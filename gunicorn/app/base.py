@@ -120,6 +120,9 @@ class Application(object):
         if self.cfg.spew:
             debug.spew()
 
+        if self.cfg.umask is not None:
+            os.umask(self.cfg.umask)
+
         if self.cfg.daemon:
             util.daemonize(self.cfg.enable_stdio_inheritance)
 

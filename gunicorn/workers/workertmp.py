@@ -18,12 +18,10 @@ else:
 class WorkerTmp(object):
 
     def __init__(self, cfg):
-        old_umask = os.umask(cfg.umask)
         fd, name = tempfile.mkstemp(prefix="wgunicorn-")
 
         # allows the process to write to the file
         util.chown(name, cfg.uid, cfg.gid)
-        os.umask(old_umask)
 
         # unlink the file so we don't leak tempory files
         try:
