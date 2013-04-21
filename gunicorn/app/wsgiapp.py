@@ -21,7 +21,8 @@ class WSGIApplication(Application):
 
         cwd = util.getcwd()
 
-        sys.path.insert(0, cwd)
+        if not cwd in sys.path:
+            sys.path.insert(0, cwd)
 
     def load(self):
         return util.import_app(self.app_uri)
